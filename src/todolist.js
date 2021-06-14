@@ -2,6 +2,8 @@ import React, { Component,Fragment } from 'react';
 import {Input,Button,List} from 'antd'
 import 'antd/dist/antd.css';
 import store from './store/index'
+import { CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM} from './store/actionTypes'
+import { getInputChangeAction, getAddItemAction, getDeleteItemAction} from './store/actionCreators'
 
 
 class TodoList extends Component {
@@ -27,7 +29,7 @@ class TodoList extends Component {
                     footer={<div>Footer</div>}
                     bordered
                     dataSource={this.state.list}
-                    renderItem={item => (<List.Item>{item}</List.Item>)}
+                    renderItem={(item,index) => (<List.Item onClick={this.handleItemDelete.bind(this,index)}>{item}</List.Item>)}
                 />
             </Fragment>
         )
@@ -41,11 +43,12 @@ class TodoList extends Component {
         // })
         //使用 redux 第一步
         //创建 action 改变redux里的数据
-        const action = {
-            type: 'change_input_value',
-            value: e.target.value
-        }
+        // const action = {
+        //     type: CHANGE_INPUT_VALUE,
+        //     value: e.target.value
+        // }
         //第二步 调用 store中的dispatch方法将创建的action传入
+        const action = getInputChangeAction(e.target.value);
         store.dispatch(action)
     }
     //订阅store所执行的函数
@@ -57,12 +60,23 @@ class TodoList extends Component {
         }))
     }
     handleBtnClick(){
-        const action = {
-            type: 'add_todo_item',
-            value: this.state.inputValue
-        }
+        // const action = {
+        //     type: ADD_TODO_ITEM,
+        //     value: this.state.inputValue
+        // }
+        const action = getAddItemAction();
         store.dispatch(action);
         console.log(this.state)
+    }
+
+    //删除 store 中的数据
+    handleItemDelete(index){
+        // const action = {
+        //     type: DELETE_TODO_ITEM,
+        //     value:index
+        // }
+        const action = getDeleteItemAction(index);
+        store.dispatch(action)
     }
 }
 
