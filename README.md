@@ -68,3 +68,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+# yarn add redux
+# yarn add react-redux
+# yarn add antd
+# yarn add axios
+
+# src 下 todolist 组件主要描述redux 用法
+# src 下 reactRedux包下的组件主要描述 react-redux 的用法
